@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <div class="mt-4">
+        <div class="row">
+            <h2 style="color: red">Lịch sử dự đoán </h2>
+            <form action="/history">
+                <input type="date" id="day" name="day">
+                <button type="submit">Xem</button>
+            </form>
+            <div class="mt-4"></div>
+            <div class="col"></div>
+            <div class="col-8">
+                <h2 id="date" style="color: red">Dự báo nhiệt độ ngày mai: {{dateShow}}-{{monthShow}} </h2>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">STT</th>
+                            <th scope="col">Nhiệt độ (độ C)</th>
+                            <th scope="col">Thời điểm</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each prediction}}
+                        <tr>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.temperature}}</td>
+                            <td>{{this.Hour}}h</td>
+
+                        </tr>
+
+                        {{/each}}
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="mt-4"></div>
+    </div>
+</body>
+
+</html>
