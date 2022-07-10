@@ -18,9 +18,6 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 
-// HTTP logger
-app.use(morgan('combined'))
-
 // Template engine
 
 app.engine(

@@ -2,35 +2,21 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JNKKKK/MoreToggles.css@0.2.1/output/moretoggles.min.css">
 </head>
 
 <body>
-
-    <h1 style="color: red">Điều khiển các thiết bị trong nhà </h1>
+    <div class="mt-4"></div>
+    <h2 style="color: red">Điều khiển các thiết bị</h2> {{#each devices}}
 
     <div class="mt-4">
+
         <div class="row">
-            <div class="mt-ios">
-                <p style="color: blue">Quạt</p>
-                <input id="1" type="checkbox" />
-                <label for="1"></label>
-            </div>
 
             <div class="mt-ios">
-                <p style="color: blue">Máy sưởi</p>
-                <input id="2" type="checkbox" />
-                <label for="2"></label>
-            </div>
-
-            <div class="mt-ios">
-                <p style="color: blue">Đèn</p>
-                <input id="3" type="checkbox" />
-                <label for="3"></label>
+                <p style="color: blue">{{this.Name}}</p>
+                <a class="{{this.type}}" href="/control/{{this._id}}" role="button">{{this.Show}}</a>
             </div>
         </div>
-
+        <div class="mt-4"></div>
     </div>
-</body>
-
-</html>
+    {{/each}}
