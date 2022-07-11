@@ -45,20 +45,20 @@ class Controller {
     }
 
     control(req, res, next) {
-        client.subscribe('on');
-        client.subscribe('off');
+        client.subscribe('onnn!!!');
+        client.subscribe('offf!!!');
 
         client.on('message', function(topic, message) {
             console.log(topic + ': ' + message.toString());
             Device.findById(message)
                 .then(device => {
                     device.State = topic
-                    if (topic == 'on') {
+                    if (topic == 'onnn!!!') {
                         device.State = true
                         device.Show = 'On'
                         device.type = 'btn btn-success'
                     }
-                    if (topic == 'off') {
+                    if (topic == 'offf!!!') {
                         device.State = false
                         device.Show = 'Off'
                         device.type = 'btn btn-danger'

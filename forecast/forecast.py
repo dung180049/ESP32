@@ -77,10 +77,12 @@ with tf.compat.v1.Session() as sess:
     print (y_pred[1])
 
     df = pd.DataFrame({"Hour": hourList, "temperature": y_pred[1]})    
-    df.to_csv('forecast/csv/' + str(today.day) + str(today.month) + '.csv')
-plt.title("Compare Predict vs Actual Temperature", fontsize=14)
+    df.to_csv('forecast/csv/246.csv')
+
+
+'''plt.title("Compare Predict vs Actual Temperature", fontsize=14)
 plt.plot(pd.Series(np.ravel(Y_test)), "bo", markersize=5, label="Actual")
 plt.plot(pd.Series(np.ravel(y_pred[1])), "r.", markersize=5, label="Predict")
 plt.legend(loc="upper left")
 plt.xlabel("Time line")
-plt.savefig('src/public/img/' + str(today.day) + str(today.month) + '.png')
+plt.savefig('src/public/img/' + str(today.day) + str(today.month) + '.png')'''
