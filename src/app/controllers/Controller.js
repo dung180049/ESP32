@@ -6,7 +6,7 @@ const Sensor = require('../models/sensor')
 const Device = require('../models/device')
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose')
 const mqtt = require('mqtt')
-const client = mqtt.connect('mqtt://vietdung:Fjxo8PJ6kkHeAjrl@vietdung.cloud.shiftr.io', {
+const client = mqtt.connect('mqtt://public:public@public.cloud.shiftr.io', {
     clientId: 'm1'
 })
 
@@ -45,20 +45,20 @@ class Controller {
     }
 
     control(req, res, next) {
-        client.subscribe('onnn!!!');
-        client.subscribe('offf!!!');
+        client.subscribe('on');
+        client.subscribe('off');
 
         client.on('message', function(topic, message) {
             console.log(topic + ': ' + message.toString());
             Device.findById(message)
                 .then(device => {
                     device.State = topic
-                    if (topic == 'onnn!!!') {
+                    if (topic == 'on') {
                         device.State = true
                         device.Show = 'On'
                         device.type = 'btn btn-success'
                     }
-                    if (topic == 'offf!!!') {
+                    if (topic == 'off') {
                         device.State = false
                         device.Show = 'Off'
                         device.type = 'btn btn-danger'

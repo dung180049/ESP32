@@ -1,10 +1,10 @@
-import datetime
-import tensorflow as tf
+#import datetime
+#import tensorflow as tf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-today = datetime.datetime.now()
+'''today = datetime.datetime.now()
 
 file_path = 'forecast/data.csv'
 data = pd.read_csv(file_path, delimiter=',', header = 0, skipinitialspace = True)
@@ -77,12 +77,18 @@ with tf.compat.v1.Session() as sess:
     print (y_pred[1])
 
     df = pd.DataFrame({"Hour": hourList, "temperature": y_pred[1]})    
-    df.to_csv('forecast/csv/246.csv')
+    df.to_csv('forecast/csv/107.csv')'''
 
+Y = pd.read_csv('forecast/csv/127.csv')
+y_pred = Y['temperature']
 
-'''plt.title("Compare Predict vs Actual Temperature", fontsize=14)
+df = pd.read_csv('forecast/data.csv')
+m = df[(df['Month'] == 7) & (df['Date'] == 12)]
+Y_test = m['temperature']
+
+plt.title("Compare Predict vs Actual Temperature", fontsize=14)
 plt.plot(pd.Series(np.ravel(Y_test)), "bo", markersize=5, label="Actual")
-plt.plot(pd.Series(np.ravel(y_pred[1])), "r.", markersize=5, label="Predict")
+plt.plot(pd.Series(np.ravel(y_pred)), "r.", markersize=5, label="Predict")
 plt.legend(loc="upper left")
 plt.xlabel("Time line")
-plt.savefig('src/public/img/' + str(today.day) + str(today.month) + '.png')'''
+plt.savefig('src/public/img/127.png')

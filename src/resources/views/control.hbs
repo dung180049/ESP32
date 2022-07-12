@@ -6,15 +6,19 @@
 
 <body>
     <div class="mt-4"></div>
-    <h2 style="color: red">Điều khiển các thiết bị</h2> {{#each devices}}
+    <h1 style="color: red">Điều khiển các thiết bị</h1> 
+    {{#each devices}}
 
     <div class="mt-4">
 
         <div class="row">
 
             <div class="mt-ios">
-                <p style="color: blue">{{this.Name}}</p>
-                <a class="{{this.type}}" href="/control/{{this._id}}" role="button">{{this.Show}}</a>
+                <h1>
+                    <a class="{{this.type}}" href="/control/{{this._id}}" role="button">{{this.Show}}</a>
+                    {{this.Name}}
+                </h1>
+                
             </div>
         </div>
         <div class="mt-4"></div>
