@@ -40,8 +40,24 @@ class Controller {
         })
     }
 
-    searchParams(req, res) {
-        res.render('param')
+    searchParams(req, res, next) {
+        var time = new Date()
+        var timeInMilliseconds = time.getTime()
+        var timeTomorrow = timeInMilliseconds + (7 * 60 * 60 * 1000)
+        var timeShow = new Date(timeTomorrow)
+        var dateShow = timeShow.getDate()
+        var monthShow = timeShow.getMonth() + 1
+
+        Sensor.find({ Month: monthShow })
+            .find({ Date: dateShow })
+            .then(sensors => {
+                res.render('show', {
+                    sensors: multipleMongooseToObject(sensors),
+                    dateShow,
+                    monthShow
+                })
+            })
+            .catch(next);
     }
 
     control(req, res, next) {
@@ -137,8 +153,8 @@ class Controller {
         var monthShow = timeShow.getMonth() + 1
 
 
-        // const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
-        const filePathCSV = `forecast/csv/236.csv`
+        const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
+        //const filePathCSV = `forecast/csv/236.csv`
         const tomorrowData = csvReader.readFile(filePathCSV)
         const sheets = tomorrowData.SheetNames
         const prediction = csvReader.utils.sheet_to_json(tomorrowData.Sheets[sheets])
