@@ -34,10 +34,23 @@ class Controller {
         var dayShow = new Date(regex)
         var dateShow = dayShow.getDate()
         var monthShow = dayShow.getMonth() + 1
-        res.render('history', {
-            dateShow,
-            monthShow
-        })
+
+        const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
+        const tomorrowData = csvReader.readFile(filePathCSV)
+        const sheets = tomorrowData.SheetNames
+        const prediction = csvReader.utils.sheet_to_json(tomorrowData.Sheets[sheets])
+
+        Sensor.find({ Month: monthShow })
+            .find({ Date: dateShow })
+            .then(sensors => {
+                res.render('history', {
+                    sensors: multipleMongooseToObject(sensors),
+                    dateShow,
+                    monthShow,
+                    prediction
+                })
+            })
+            .catch(next);
     }
 
     searchParams(req, res, next) {
@@ -66,6 +79,7 @@ class Controller {
 
         client.on('message', function(topic, message) {
             console.log(topic + ': ' + message.toString());
+            
             Device.findById(message)
                 .then(device => {
                     device.State = topic
@@ -81,12 +95,11 @@ class Controller {
                     }
                     device.save()
                 })
-                .catch(next)
-
+                .catch(next) 
         })
         Device.find({})
             .then(devices => res.render('control', {
-                devices: multipleMongooseToObject(devices)
+                devices: multipleMongooseToObject(devices),
             }))
             .catch(next)
     }
@@ -114,7 +127,7 @@ class Controller {
     update(req, res) {
         Sensor.find({}, function(err, sensors) {
             if (err) {
-                return res.render('predict')
+                return res.send('ERROR')
             } else {
                 let csv
                 try {
@@ -125,15 +138,11 @@ class Controller {
                 const filePath = ('forecast/data.csv')
                 fs.writeFile(filePath, csv, function(err) {
                     if (err) {
-                        return res.render('control')
+                        return res.send('ERROR')
                     } else {
-                        /* const { spawn } = require('child_process');
+                        const { spawn } = require('child_process');
                         const pyProg = spawn('python', ['forecast/forecast.py']);
-
-                        pyProg.stdout.on('data', function(data) {
-                            console.log(data.toString()); */
                         return res.render('home')
-                            // })
                     }
                 })
             }
@@ -152,9 +161,7 @@ class Controller {
         var dateShow = timeShow.getDate()
         var monthShow = timeShow.getMonth() + 1
 
-
         const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
-        //const filePathCSV = `forecast/csv/236.csv`
         const tomorrowData = csvReader.readFile(filePathCSV)
         const sheets = tomorrowData.SheetNames
         const prediction = csvReader.utils.sheet_to_json(tomorrowData.Sheets[sheets])
