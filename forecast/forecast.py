@@ -78,19 +78,27 @@ with tf.compat.v1.Session() as sess:
         y_pred[0][i] = round((y_pred[0][i]), 2)
     print (y_pred[0])
 
-    df = pd.DataFrame({"Hour": hourList, "temperature": y_pred[0]})    
-    df.to_csv('forecast/csv/' + str(dayPredict.date + 1) + str(dayPredict.month) + '.csv')
+    # df = pd.read_csv('forecast/csv/28.csv')
+    # df.insert(3, 'humidity', y_pred[0])
+    # df.to_csv('forecast/csv/28.csv')
 
-Y = pd.read_csv('forecast/csv/' + str(today.date + 1) + str(today.month) + '.csv')
-y_pred = Y['temperature']
+    df = pd.DataFrame({"Hour": hourList, "temperature": y_pred[0]})  
+    df.to_csv('forecast/csv/28.csv')
+    #df.to_csv('forecast/csv/' + str(dayPredict.date + 1) + str(dayPredict.month) + '.csv')
+
+# Y = pd.read_csv('forecast/csv/' + str(today.date + 1) + str(today.month) + '.csv')
+'''Y = pd.read_csv('forecast/csv/127.csv')
+y_pred = Y['humidity']
 
 df = pd.read_csv('forecast/data.csv')
-m = df[(df['Month'] == today.month) & (df['Date'] == today.date)]
-Y_test = m['temperature']
+# m = df[(df['Month'] == today.month) & (df['Date'] == today.date)]
+m = df[(df['Month'] == 7) & (df['Date'] == 12)]
+Y_test = m['humidity']
 
-plt.title("So sánh nhiệt độ dự đoán với nhiệt độ thực tế", fontsize=14)
+plt.title("So sánh độ ẩm dự đoán với độ ẩm thực tế", fontsize=14)
 plt.plot(pd.Series(np.ravel(Y_test)), "bo", markersize=5, label="Actual")
 plt.plot(pd.Series(np.ravel(y_pred)), "r.", markersize=5, label="Predict")
 plt.legend(loc="upper left")
 plt.xlabel("Thời gian")
-plt.savefig('src/public/img/' + str(today.date + 1) + str(today.month) + '.png')
+# plt.savefig('src/public/img/' + str(today.date + 1) + str(today.month) + '.png')
+plt.savefig('src/public/img/h127.png')'''

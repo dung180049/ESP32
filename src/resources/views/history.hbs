@@ -16,9 +16,40 @@
             </form>
             <div class="col"></div>
             <div class="col-8">
-                <h1 id="date" style="color: red">Đồ thị so sánh nhiệt độ dự đoán với giá trị thực tế ngày {{dateShow}}-{{monthShow}} </h1>
+                <h1 id="date" style="color: red">Đồ thị so sánh thông số dự đoán với thực tế ngày {{dateShow}}-{{monthShow}} </h1>
 
                 <img src="img/{{dateShow}}{{monthShow}}.png" class="img-fluid" alt="Responsive image">
+
+                <div class="mt-4"></div>
+
+                <img src="img/h{{dateShow}}{{monthShow}}.png" class="img-fluid" alt="Responsive image">
+                
+                <h1 id="date" style="color: red">Thông số dự đoán ngày {{dateShow}}-{{monthShow}} </h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">STT</th>
+                            <th scope="col">Nhiệt độ (độ C)</th>
+                            <th scope="col">Độ ẩm (%)</th>
+                            <th scope="col">Thời điểm</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each prediction}}
+                        <tr>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.temperature}}</td>
+                            <td>{{this.humidity}}</td>
+                            <td>{{this.Hour}}h</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
             </div>
             
             <div class="col"></div>

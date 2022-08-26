@@ -17,7 +17,7 @@
             <div class="mt-4"></div>
             <div class="col"></div>
             <div class="col-8">
-                <h1 id="date" style="color: red">Dự báo nhiệt độ ngày mai: {{dateShow}}-{{monthShow}} </h1>
+                <h1 id="date" style="color: red">Dự báo thông số ngày mai: {{dateShow}}-{{monthShow}} </h1>
 
                 <table class="table table-striped">
                     <thead>
@@ -25,6 +25,7 @@
 
                             <th scope="col">STT</th>
                             <th scope="col">Nhiệt độ (độ C)</th>
+                            <th scope="col">Độ ẩm (%)</th>
                             <th scope="col">Thời điểm</th>
 
 
@@ -36,6 +37,7 @@
                         <tr>
                             <th scope="row">{{sum @index 1}}</th>
                             <td>{{this.temperature}}</td>
+                            <td>{{this.humidity}}</td>
                             <td>{{this.Hour}}h</td>
 
                         </tr>

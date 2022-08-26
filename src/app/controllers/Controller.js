@@ -36,6 +36,7 @@ class Controller {
         var monthShow = dayShow.getMonth() + 1
 
         const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
+        //const filePathCSV = `forecast/csv/267.csv`
         const tomorrowData = csvReader.readFile(filePathCSV)
         const sheets = tomorrowData.SheetNames
         const prediction = csvReader.utils.sheet_to_json(tomorrowData.Sheets[sheets])
@@ -140,8 +141,8 @@ class Controller {
                     if (err) {
                         return res.send('ERROR')
                     } else {
-                        const { spawn } = require('child_process');
-                        const pyProg = spawn('python', ['forecast/forecast.py']);
+                        // const { spawn } = require('child_process');
+                        // const pyProg = spawn('python', ['forecast/forecast.py']);
                         return res.render('home')
                     }
                 })
@@ -161,7 +162,8 @@ class Controller {
         var dateShow = timeShow.getDate()
         var monthShow = timeShow.getMonth() + 1
 
-        const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
+        const filePathCSV = `forecast/csv/267.csv`
+        //const filePathCSV = `forecast/csv/${dateShow}${monthShow}.csv`
         const tomorrowData = csvReader.readFile(filePathCSV)
         const sheets = tomorrowData.SheetNames
         const prediction = csvReader.utils.sheet_to_json(tomorrowData.Sheets[sheets])
